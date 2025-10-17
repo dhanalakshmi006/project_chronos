@@ -33,12 +33,13 @@ python -m venv venv
 venv\Scripts\activate  
 ### On macOS/Linux:  
 source venv/bin/activate  
+
 **Step 3:** Install Dependencies  
  pip install -r requirements.txt
 
 **Step 4:**  Set up API Keys  
-1) Create a file names ".env" in the project folder.
-2) Ass the following lines in that folder:
+1) Create a file named ".env" in the project folder.
+2) Add the following lines in that folder:
 GEMINI_API_KEY=your_gemini_api_key_here (please Modify)
 GOOGLE_CSE_KEY=your_google_custom_search_key_here (Modify)
 GOOGLE_CX=your_custom_search_engine_id_here (Modify)
