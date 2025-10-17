@@ -16,7 +16,7 @@ GEMINI_KEY = os.environ.get("GEMINI_API_KEY")
 GOOGLE_CSE_KEY = os.environ.get("GOOGLE_CSE_KEY")
 GOOGLE_CX = os.environ.get("GOOGLE_CX")
 
-# Unified prompt (same as main.py)
+# Prompt to get the reconstructed text, explanation and the key words.
 PROMPT_TEMPLATE = """
 Imagine that you are an AI Archeologist. You will be provided with an incomplete fragment, written in obscure slang, or filled with cultural references that are no longer understood. 
 
