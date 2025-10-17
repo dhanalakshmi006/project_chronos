@@ -17,14 +17,14 @@
 
         {% if report %}
         <div class="report">
-            <h2>Original Fragment</h2>
+            <h2>Original Fragment:</h2>
             <p>{{ report.original }}</p>
 
-            <h2>AI-Reconstructed Text</h2>
+            <h2>AI-Reconstructed Text:</h2>
             <p>{{ report.reconstructed }}</p>
 
             {% if report.explanations %}
-            <h3>Explanations</h3>
+            <h3>Explanations:</h3>
             <ul>
                 {% for e in report.explanations %}
                 <li>{{ e }}</li>
@@ -33,7 +33,7 @@
             {% endif %}
 
             {% if report.links %}
-            <h3>Contextual Sources</h3>
+            <h3>Contextual Sources:</h3>
             <ul>
                 {% for l in report.links %}
                 <li><a href="{{ l.link }}" target="_blank">{{ l.title }}</a></li>
