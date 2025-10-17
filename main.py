@@ -15,7 +15,6 @@ GEMINI_KEY = os.environ.get("GEMINI_API_KEY")
 GOOGLE_CSE_KEY = os.environ.get("GOOGLE_CSE_KEY")
 GOOGLE_CX = os.environ.get("GOOGLE_CX")
 
-# --- SINGLE PROMPT ---
 PROMPT_TEMPLATE ="""
 Imagine that you are an AI Archeologist. You will be provided with an incomplete fragment, written in obscure slang, or filled with cultural references that are no longer understood. 
 
@@ -44,14 +43,12 @@ Output:
 Fragment: "{fragment}"
 """
 
-# --- GEMINI CALL ---
 def call_gemini(fragment: str):
     client = genai.Client(api_key=GEMINI_KEY) if GEMINI_KEY else genai.Client()
     prompt = PROMPT_TEMPLATE.replace("{fragment}", fragment)
     resp = client.models.generate_content(model=GEMINI_MODEL, contents=prompt)
     text = getattr(resp, "text", str(resp))
 
-    # Try parsing JSON safely
     try:
         parsed = json.loads(text)
     except Exception:
@@ -64,7 +61,7 @@ def call_gemini(fragment: str):
         }
     return parsed
 
-# --- GOOGLE SEARCH ---
+
 def google_custom_search(query: str, num=5):
     if not GOOGLE_CSE_KEY or not GOOGLE_CX:
         return []
@@ -75,7 +72,6 @@ def google_custom_search(query: str, num=5):
     items = r.json().get("items", [])
     return [{"title": it.get("title"), "link": it.get("link")} for it in items]
 
-# --- REPORT GENERATION ---
 def assemble_report(original, reconstructed, explanations, links):
     lines = []
     lines.append("--- RECONSTRUCTION REPORT ---")
@@ -92,7 +88,7 @@ def assemble_report(original, reconstructed, explanations, links):
         lines.append(f"* {l['link']} ({l['title']})")
     return "\n".join(lines)
 
-# --- MAIN EXECUTION ---
+
 def main():
     fragment = input("Enter the fragment you want me to reconstruct:\n> ")
     parsed = call_gemini(fragment)
