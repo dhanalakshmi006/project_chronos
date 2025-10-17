@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Chronos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="container" style="background-image: url('static/back.jpg');">
+        <b><h1>Project Chronos: The AI Archeologist</h1></b>
+        <form method="POST">
+            <label>Enter the Fragment for reconstruction:</label>
+            <textarea name="fragment" required></textarea><br>
+            <button type="submit">Reconstruct Text</button>
+        </form>
+
+        {% if report %}
+        <div class="report">
+            <h2>Original Fragment</h2>
+            <p>{{ report.original }}</p>
+
+            <h2>AI-Reconstructed Text</h2>
+            <p>{{ report.reconstructed }}</p>
+
+            {% if report.explanations %}
+            <h3>Explanations</h3>
+            <ul>
+                {% for e in report.explanations %}
+                <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if report.links %}
+            <h3>Contextual Sources</h3>
+            <ul>
+                {% for l in report.links %}
+                <li><a href="{{ l.link }}" target="_blank">{{ l.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
